@@ -28,6 +28,16 @@
 
 ---
 
+## 本地开发边界
+
+- 外层当前目录是唯一 Git 仓库，也是插件源码、构建配置、发布产物的工作区。
+- `扩展测试仓库/` 仅作为 Obsidian 测试 vault 使用，不在其中初始化 Git。
+- 不向 `扩展测试仓库/` 写入 README、计划文档、源码结构等实质性项目文件。
+- 需要验证插件时，只把构建产物复制到 `扩展测试仓库/.obsidian/plugins/daily-dashboard/`。
+- 不改动用户真实 Obsidian vault；所有加载验证优先使用 `扩展测试仓库/`。
+
+---
+
 ## 目录结构
 
 ```
@@ -64,6 +74,7 @@ src/
 ### 数据契约
 - `types.ts` 必须在 Phase 0 一次定义完整，宁可多加可选字段也不要遗漏核心结构。
 - 所有 widget 数据接口（`TaskWidgetData` / `NewsWidgetData` / `QuizWidgetData`）必须能被 `renderDashboard(data: DashboardData)` 直接消费，**禁止在渲染器内部做数据转换**。
+- `DashboardData` 以 `widgets: DashboardWidgetData[]` 作为唯一 widget 数据入口，禁止维护顶层 `tasks` / `news` / `quiz` 副本。
 
 ### CSS 命名空间
 - 所有 CSS 类名必须以 `.dd-` 前缀开头，避免被 Obsidian 全局样式污染或污染 Obsidian。

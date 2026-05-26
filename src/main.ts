@@ -1,0 +1,38 @@
+import { Plugin } from "obsidian";
+
+import { DEFAULT_SETTINGS, type DailyDashboardSettings } from "./settings/settings";
+
+export default class DailyDashboardPlugin extends Plugin {
+    settings: DailyDashboardSettings = DEFAULT_SETTINGS;
+
+    async onload(): Promise<void> {
+        await this.loadSettings();
+
+        this.registerMarkdownCodeBlockProcessor("daily-dashboard", (_source, el) => {
+            this.renderPhaseZeroPlaceholder(el);
+        });
+    }
+
+    async loadSettings(): Promise<void> {
+        const savedSettings = await this.loadData();
+        this.settings = Object.assign({}, DEFAULT_SETTINGS, savedSettings);
+
+        if (!savedSettings) {
+            await this.saveSettings();
+        }
+    }
+
+    async saveSettings(): Promise<void> {
+        await this.saveData(this.settings);
+    }
+
+    private renderPhaseZeroPlaceholder(container: HTMLElement): void {
+        container.empty();
+
+        const dashboard = container.createDiv({ cls: "dd-dashboard" });
+        const card = dashboard.createDiv({ cls: "dd-card" });
+
+        card.createEl("strong", { text: "Daily Dashboard" });
+        card.createEl("p", { text: "Phase 0 environment is ready." });
+    }
+}

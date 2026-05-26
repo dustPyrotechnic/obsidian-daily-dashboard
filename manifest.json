@@ -1,0 +1,10 @@
+{
+    "id": "daily-dashboard",
+    "name": "Daily Dashboard",
+    "version": "0.1.0",
+    "minAppVersion": "1.5.0",
+    "description": "Render an AI-powered daily dashboard in daily notes.",
+    "author": "dustPyrotechnic",
+    "authorUrl": "https://github.com/dustPyrotechnic",
+    "isDesktopOnly": false
+}

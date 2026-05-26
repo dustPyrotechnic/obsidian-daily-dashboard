@@ -12,9 +12,10 @@
 **时间预估：第 1 天**
 **执行方式：串行**
 
-- [ ] clone `obsidian-sample-plugin` 模板，配置 TypeScript + esbuild 构建环境
-- [ ] 在本地 Obsidian 中确认插件可以正常加载
-- [ ] 按规划建好完整目录结构（所有文件夹和空文件到位）
+- [x] clone `obsidian-sample-plugin` 模板，配置 TypeScript + esbuild 构建环境
+- [x] 在本地 Obsidian 中确认插件可以正常加载
+  - 已使用 `扩展测试仓库/` 作为测试 vault 验证：Obsidian 1.12.7 中 `daily-dashboard` 启用且 loaded 状态为 `true`，插件成功写出默认 `data.json`。
+- [x] 按规划建好完整目录结构（所有文件夹和空文件到位）
 
 ```
 src/
@@ -43,7 +44,8 @@ src/
     └── content-cache.ts
 ```
 
-- [ ] 编写 `types.ts`，定义所有核心数据接口（**这是整个项目的数据契约，必须最先完成**）
+- [x] 编写 `types.ts`，定义所有核心数据接口（**这是整个项目的数据契约，必须最先完成**）
+  - `DashboardData` 使用 `widgets: DashboardWidgetData[]` 作为唯一 widget 数据入口，不再额外维护顶层 `tasks` / `news` / `quiz` 字段。
 
 ```typescript
 // 以下所有 interface 必须在此阶段全部定义完毕

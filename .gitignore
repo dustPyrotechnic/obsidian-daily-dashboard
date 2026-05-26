@@ -2,7 +2,6 @@
 node_modules/
 npm-debug.log*
 yarn-error.log
-package-lock.json
 yarn.lock
 
 # Build output (Obsidian plugin artifacts are produced by esbuild)
@@ -25,3 +24,6 @@ main.js.map
 
 # Obsidian local data
 data.json
+
+# Local Obsidian test vault
+扩展测试仓库/
