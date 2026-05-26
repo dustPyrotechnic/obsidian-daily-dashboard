@@ -1,0 +1,27 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# Build output (Obsidian plugin artifacts are produced by esbuild)
+main.js
+main.js.map
+*.tsbuildinfo
+
+# Editor / OS
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Env / secrets
+.env
+.env.*
+
+# Logs
+*.log
+
+# Obsidian local data
+data.json
