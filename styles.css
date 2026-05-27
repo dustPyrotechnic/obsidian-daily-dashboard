@@ -1,3 +1,8 @@
+/* ============================================================
+ * Daily Dashboard · Phase 1 A 线样式
+ * 全部类名以 .dd- 前缀；颜色仅使用 Obsidian CSS 变量。
+ * ============================================================ */
+
 .dd-dashboard {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
@@ -9,9 +14,364 @@
     color: var(--text-normal);
 }
 
+/* ---------- Card ---------- */
+
 .dd-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-2);
     padding: var(--size-4-4);
     border: var(--border-width) solid var(--background-modifier-border);
     border-radius: var(--radius-s);
     background: var(--background-secondary);
+    transition: border-color 120ms ease;
+}
+
+.dd-card:hover {
+    border-color: var(--background-modifier-border-hover);
+}
+
+.dd-card--wide {
+    grid-column: span 2;
+}
+
+.dd-card--error {
+    border-color: var(--background-modifier-error);
+}
+
+.dd-card__header {
+    display: flex;
+    align-items: center;
+    gap: var(--size-4-2);
+    padding-bottom: var(--size-4-2);
+    border-bottom: var(--border-width) solid var(--background-modifier-border);
+}
+
+.dd-card__icon {
+    font-size: var(--font-ui-medium);
+    color: var(--text-muted);
+}
+
+.dd-card__title {
+    margin: 0;
+    font-size: var(--font-ui-medium);
+    font-weight: var(--font-semibold);
+    color: var(--text-normal);
+}
+
+.dd-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-2);
+    color: var(--text-normal);
+}
+
+/* ---------- List ---------- */
+
+.dd-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-1);
+}
+
+.dd-list-item {
+    display: flex;
+    align-items: center;
+    gap: var(--size-4-2);
+    padding: var(--size-4-1) var(--size-4-2);
+    border-radius: var(--radius-s);
+    background: var(--background-primary);
+}
+
+.dd-list-item--checked .dd-list-item__text {
+    color: var(--text-muted);
+    text-decoration: line-through;
+}
+
+.dd-list-item__marker {
+    flex: 0 0 auto;
+    color: var(--text-muted);
+}
+
+.dd-list-item__marker--checkbox {
+    color: var(--interactive-accent);
+}
+
+.dd-list-item__text {
+    flex: 1 1 auto;
+    word-break: break-word;
+}
+
+.dd-list-item__priority {
+    flex: 0 0 auto;
+    padding: 0 var(--size-4-1);
+    font-size: var(--font-ui-smaller);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-s);
+    background: var(--background-modifier-hover);
+}
+
+.dd-list-item__badge {
+    flex: 0 0 auto;
+    padding: 0 var(--size-4-1);
+    font-size: var(--font-ui-smaller);
+    color: var(--text-on-accent);
+    background: var(--interactive-accent);
+    border-radius: var(--radius-s);
+}
+
+/* ---------- Priority ---------- */
+
+.dd-priority-high {
+    color: var(--text-error);
+}
+
+.dd-priority-medium {
+    color: var(--text-warning);
+}
+
+.dd-priority-low {
+    color: var(--text-muted);
+}
+
+/* ---------- Callout ---------- */
+
+.dd-callout {
+    display: flex;
+    gap: var(--size-4-2);
+    padding: var(--size-4-2) var(--size-4-3);
+    border-left: 3px solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    background: var(--background-primary);
+    color: var(--text-normal);
+}
+
+.dd-callout--info {
+    border-left-color: var(--interactive-accent);
+}
+
+.dd-callout--warning {
+    border-left-color: var(--text-warning);
+    color: var(--text-warning);
+}
+
+.dd-callout--success {
+    border-left-color: var(--text-success);
+}
+
+.dd-callout__text {
+    flex: 1 1 auto;
+    word-break: break-word;
+}
+
+/* ---------- Collapsible ---------- */
+
+.dd-collapsible {
+    border: var(--border-width) solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    background: var(--background-primary);
+}
+
+.dd-collapsible__summary {
+    padding: var(--size-4-2) var(--size-4-3);
+    cursor: pointer;
+    color: var(--text-muted);
+    user-select: none;
+}
+
+.dd-collapsible[open] .dd-collapsible__summary {
+    color: var(--text-normal);
+    border-bottom: var(--border-width) solid var(--background-modifier-border);
+}
+
+.dd-collapsible__detail {
+    padding: var(--size-4-2) var(--size-4-3);
+    color: var(--text-normal);
+    white-space: pre-wrap;
+}
+
+/* ---------- Progress ---------- */
+
+.dd-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--size-4-2);
+}
+
+.dd-progress__track {
+    flex: 1 1 auto;
+    height: 6px;
+    border-radius: var(--radius-s);
+    background: var(--background-modifier-border);
+    overflow: hidden;
+}
+
+.dd-progress__fill {
+    height: 100%;
+    background: var(--interactive-accent);
+    transition: width 200ms ease;
+}
+
+.dd-progress__label {
+    flex: 0 0 auto;
+    font-size: var(--font-ui-smaller);
+    color: var(--text-muted);
+}
+
+/* ---------- Skeleton ---------- */
+
+.dd-skeleton-body {
+    gap: var(--size-4-2);
+}
+
+.dd-skeleton {
+    border-radius: var(--radius-s);
+    background: var(--background-modifier-border);
+    animation: dd-pulse 1.4s ease-in-out infinite;
+}
+
+.dd-skeleton__row {
+    height: 12px;
+    width: 100%;
+}
+
+.dd-skeleton__row--wide {
+    height: 16px;
+}
+
+.dd-skeleton__row--narrow {
+    width: 60%;
+}
+
+@keyframes dd-pulse {
+    0% {
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0.4;
+    }
+}
+
+/* ---------- Error ---------- */
+
+.dd-error {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-2);
+    padding: var(--size-4-3);
+    border-radius: var(--radius-s);
+    background: var(--background-modifier-error-rgb, var(--background-primary));
+    color: var(--text-error);
+}
+
+.dd-error__icon {
+    font-size: var(--font-ui-medium);
+}
+
+.dd-error__message {
+    color: var(--text-error);
+    word-break: break-word;
+}
+
+.dd-error__hint {
+    font-size: var(--font-ui-smaller);
+    color: var(--text-muted);
+}
+
+/* ---------- News widget ---------- */
+
+.dd-widget {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-2);
+}
+
+.dd-news-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-3);
+}
+
+.dd-news-item {
+    display: flex;
+    flex-direction: column;
+    gap: var(--size-4-1);
+    padding: var(--size-4-2);
+    border: var(--border-width) solid var(--background-modifier-border);
+    border-radius: var(--radius-s);
+    background: var(--background-primary);
+}
+
+.dd-news-item__title {
+    color: var(--text-accent);
+    font-weight: var(--font-medium);
+    text-decoration: none;
+}
+
+.dd-news-item__title:hover {
+    text-decoration: underline;
+}
+
+.dd-news-item__title--plain {
+    color: var(--text-normal);
+}
+
+.dd-news-item__title--plain:hover {
+    text-decoration: none;
+}
+
+.dd-news-item__meta {
+    display: flex;
+    gap: var(--size-4-2);
+    font-size: var(--font-ui-smaller);
+    color: var(--text-muted);
+}
+
+.dd-news-item__summary {
+    color: var(--text-normal);
+    word-break: break-word;
+}
+
+/* ---------- Quiz widget ---------- */
+
+.dd-quiz__header {
+    display: flex;
+    gap: var(--size-4-2);
+    align-items: center;
+}
+
+.dd-quiz__difficulty {
+    padding: 0 var(--size-4-2);
+    font-size: var(--font-ui-smaller);
+    text-transform: uppercase;
+    border-radius: var(--radius-s);
+    background: var(--background-modifier-hover);
+    color: var(--text-muted);
+}
+
+.dd-quiz__difficulty--easy {
+    color: var(--text-success);
+}
+
+.dd-quiz__difficulty--medium {
+    color: var(--text-warning);
+}
+
+.dd-quiz__difficulty--hard {
+    color: var(--text-error);
+}
+
+.dd-quiz__category {
+    font-size: var(--font-ui-smaller);
+    color: var(--text-muted);
+}
+
+.dd-quiz__question {
+    margin: 0;
+    color: var(--text-normal);
+    word-break: break-word;
 }

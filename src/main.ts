@@ -1,12 +1,20 @@
-import { Plugin } from "obsidian";
+import { Notice, Plugin } from "obsidian";
 
+import { autoOpenIfEnabled } from "./core/daily-note";
 import { DEFAULT_SETTINGS, type DailyDashboardSettings } from "./settings/settings";
+import { DailyDashboardSettingTab } from "./settings/settings-tab";
 
 export default class DailyDashboardPlugin extends Plugin {
     settings: DailyDashboardSettings = DEFAULT_SETTINGS;
 
     async onload(): Promise<void> {
         await this.loadSettings();
+
+        this.addSettingTab(new DailyDashboardSettingTab(this.app, this));
+
+        this.app.workspace.onLayoutReady(() => {
+            void this.autoOpenDailyNote();
+        });
 
         this.registerMarkdownCodeBlockProcessor("daily-dashboard", (_source, el) => {
             this.renderPhaseZeroPlaceholder(el);
@@ -24,6 +32,15 @@ export default class DailyDashboardPlugin extends Plugin {
 
     async saveSettings(): Promise<void> {
         await this.saveData(this.settings);
+    }
+
+    private async autoOpenDailyNote(): Promise<void> {
+        try {
+            await autoOpenIfEnabled(this.app, this.settings.dailyNote);
+        } catch (err) {
+            console.error("Daily Dashboard failed to auto-open today's note.", err);
+            new Notice("Daily Dashboard: failed to open today's note.");
+        }
     }
 
     private renderPhaseZeroPlaceholder(container: HTMLElement): void {
